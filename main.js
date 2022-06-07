@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu,Notification,ipcMain } = require('electron');
+const { app, BrowserWindow, Menu,Notification,ipcMain, dialog } = require('electron');
 const path = require("path")
 const menuItem = require('./menu');
 console.log(menuItem);
@@ -13,6 +13,8 @@ function showNotification(msg) {
     notice.onclick= () => document.getElementById("output").innerText = CLICK_MESSAGE
     notice.show();
 }
+
+
 
 
 const createWindow = () => {
@@ -47,6 +49,8 @@ app.whenReady().then(() => {
     // 异步消息
     event.sender.send('asynchronous-reply', 'pong');
   })
+  // 弹窗
+console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }))
 })
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
