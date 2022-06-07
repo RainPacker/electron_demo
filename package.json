@@ -10,5 +10,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^19.0.2"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.0.8"
   }
 }

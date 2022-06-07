@@ -9,9 +9,10 @@ const CLICK_MESSAGE = 'Notification clicked!'
 
 function showNotification(msg) {
     console.log(111);
-    var notice = new Notification({ title: NOTIFICATION_TITLE, body: msg });
-    notice.onclick= () => document.getElementById("output").innerText = CLICK_MESSAGE
-    notice.show();
+    new Notification({ title: NOTIFICATION_TITLE, body: msg });
+    // var notice = new Notification({ title: NOTIFICATION_TITLE, body: msg });
+    // notice.onclick= () => document.getElementById("output").innerText = CLICK_MESSAGE
+    // notice.show();
 }
 
 
@@ -28,7 +29,8 @@ let createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  require('@electron/remote/main').initialize()
+  require('@electron/remote/main').enable(win.webContents)
   win.loadFile('index.html')
 }
 setApplicationMenus = () => { 

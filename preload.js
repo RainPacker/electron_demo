@@ -1,6 +1,6 @@
 // const remote = require('electron').remote;
 
-const { remote } = require("electron");
+const remote = require('@electron/remote')
 console.log(remote);
 console.warn(remote);
 
