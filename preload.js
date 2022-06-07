@@ -1,6 +1,13 @@
 const remote = require('electron').remote;
+const remote2 = require('electron')
+console.log(remote2);
+// New way.
+// var app = require('electron').remote.app
+// var app = require('electron').remote.require('app')
+// var BrowserWindow = require('electron').remote.BrowserWindow
+// console.log("app",app);
 console.log(global);
- console.log(remote);
+ console.log('remote', remote);
       const Menu = remote.Menu;
       const MenuItem = remote.MenuItem;
 
@@ -13,3 +20,13 @@ console.log(global);
         e.preventDefault();
         menu.popup(remote.getCurrentWindow());
       }, false);
+
+  
+// In renderer process (web page).
+// const ipcRenderer = require('electron').ipcRenderer;
+// console.log(ipcRenderer.sendSync('synchronous-message', 'ping')); // prints "pong"
+
+// ipcRenderer.on('asynchronous-reply', function(event, arg) {
+//   console.log('reply',arg); // prints "pong"
+// });
+// ipcRenderer.send('asynchronous-message', 'ping');

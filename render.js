@@ -14,6 +14,9 @@ function showNotification() {
     notice.onclick= () => document.getElementById("output").innerText = CLICK_MESSAGE
     notice.show();
 }
+window.onload = () => {
 document.getElementById("notification").onclick = () => { 
     alert(11111111)
+    showNotification();
+}
 }

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu,Notification,ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, Notification, ipcMain, dialog } = require('electron');
 const path = require("path")
 const menuItem = require('./menu');
 console.log(menuItem);
@@ -17,14 +17,15 @@ function showNotification(msg) {
 
 
 
-const createWindow = () => {
+let createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       enableRemoteModule: true,
-      preload: path.join(__dirname, './preload.js')
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
@@ -37,21 +38,34 @@ setApplicationMenus = () => {
   
   Menu.setApplicationMenu(menu);
 }
+// app.on("ready", () => {
+  
+// })
+initIpcMain = () => { 
+   ipcMain.on("asynchronous-message", function (event, args) {
+    console.log('getMessage',args);  // prints "ping"
+    // 异步消息
+    event.sender.send('asynchronous-reply', 'pong');
+  })
+  ipcMain.on('synchronous-message', function(event, arg) {
+  console.log("同步消息",arg);  // prints "ping"
+  event.returnValue = 'pong';
+});
+}
 app.whenReady().then(() => {
+  setApplicationMenus();
+  initIpcMain()
     createWindow()
      app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
      })
   showNotification("应用启动成功");
-  setApplicationMenus();
-  ipcMain.on("asynchronous-message", function (event, args) {
-    console.log(arg);  // prints "ping"
-    // 异步消息
-    event.sender.send('asynchronous-reply', 'pong');
-  })
+
+
   // 弹窗
-console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }))
+// console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }))
 })
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
