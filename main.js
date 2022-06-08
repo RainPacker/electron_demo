@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, Notification, ipcMain, dialog } = require('ele
 const path = require("path")
 const menuItem = require('./menu');
 console.log(menuItem);
+console.info(app.getPath("appData"));
 
 const NOTIFICATION_TITLE = 'APP started'
 const NOTIFICATION_BODY = 'Notification from the Renderer process. Click to log to console.'

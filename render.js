@@ -1,9 +1,10 @@
 const NOTIFICATION_TITLE = 'Title'
 const NOTIFICATION_BODY = 'Notification from the Renderer process. Click to log to console.'
 const CLICK_MESSAGE = 'Notification clicked!'
-const  remote   = require("electron");
-console.log(remote);
-console.warn(remote);
+// const  remote   = require("electron");
+// console.log(remote);
+// console.warn(remote);
+const { shell} = require("electron");
 
   
 
@@ -21,7 +22,12 @@ window.onload = () => {
 document.getElementById("notification").onclick = () => { 
     alert(11111111)
     showNotification();
-}
+    }
+    document.getElementById("fileOpen").onclick = () => {
+        shell.openPath("read -9.xlsx").then(res => { 
+            console.log(res);
+        })
+    }
 }
 
 
