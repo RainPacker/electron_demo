@@ -1,5 +1,6 @@
 {
-  "name": "demo_app",
+  "name": "demo-app",
+  "productName": "app",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",

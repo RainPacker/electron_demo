@@ -11,7 +11,7 @@ const { shell} = require("electron");
 function showNotification() {
     console.log(111);
     
-new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY })
+new Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY,icon:"logo.png" })
 .onclick = () => document.getElementById("output").innerText = CLICK_MESSAGE
     // .onclick = () => document.getElementById("output").innerText = CLICK_MESSAGE
     // var notice = new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY });
