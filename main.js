@@ -23,12 +23,16 @@ let createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    show: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js')
     }
+  })
+  win.once("ready-to-show", () => { 
+    win.show();
   })
   require('@electron/remote/main').initialize()
   require('@electron/remote/main').enable(win.webContents)
